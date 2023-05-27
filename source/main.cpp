@@ -7,6 +7,7 @@
 
 #include "../include/jam.hpp"
 
+
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Menu");
@@ -30,6 +31,7 @@ int main()
     sf::Sprite sprite_gmplay(texture_gmplayer);
     sf::Sprite sprite_exit(texture_exit);
     sf::Sprite sprite_hoppy(texture_hoppy);
+    sf::Color backgroundColor = sf::Color::White; // Couleur de fond initiale (blanc)
 
     sprite_start.scale(sf::Vector2f {0.15, 0.15});
     sprite_gmplay.scale(sf::Vector2f {0.7, 0.7});
@@ -69,8 +71,30 @@ int main()
     inputTextValue.setFillColor(sf::Color::Black);
     inputTextValue.setPosition(inputBox.getPosition().x + 10, inputBox.getPosition().y + 10);
 
+    sf::RectangleShape blackBox(sf::Vector2f(100, 50));
+    blackBox.setFillColor(sf::Color::Black);
+    blackBox.setPosition(window.getSize().x / 2 - blackBox.getSize().x - 50, window.getSize().y - blackBox.getSize().y - 50);
+
+    sf::Text blackText("Noir", font, 20);
+    blackText.setFillColor(sf::Color::White);
+    blackText.setPosition(blackBox.getPosition().x + blackBox.getSize().x / 2 - blackText.getGlobalBounds().width / 2,
+                          blackBox.getPosition().y + blackBox.getSize().y / 2 - blackText.getGlobalBounds().height / 2);
+
+    sf::RectangleShape whiteBox(sf::Vector2f(100, 50));
+    whiteBox.setFillColor(sf::Color::White);
+    whiteBox.setPosition(window.getSize().x / 2 + 50, window.getSize().y - whiteBox.getSize().y - 50);
+
+    sf::Text whiteText("Blanc", font, 20);
+    whiteText.setFillColor(sf::Color::Black);
+    whiteText.setPosition(whiteBox.getPosition().x + whiteBox.getSize().x / 2 - whiteText.getGlobalBounds().width / 2,
+                          whiteBox.getPosition().y + whiteBox.getSize().y / 2 - whiteText.getGlobalBounds().height / 2);
+
     std::string surnom;
+
     bool start_pressed = false;
+    bool gib_name = false;
+    bool isBlackSelected = false;
+    bool isWhiteSelected = false;
 
     while (window.isOpen()) {
         sf::Event event;
@@ -85,7 +109,8 @@ int main()
             }
             else if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Enter) {
-                    std::cout << "Surnom : " << surnom << std::endl;
+                    gib_name = true;
+                    //std::cout << "Surnom : " << surnom << std::endl;
                     // Ici, vous pouvez faire ce que vous voulez avec le surnom
                 }
             } else if (event.type == sf::Event::MouseMoved) {
@@ -135,8 +160,24 @@ int main()
                     } else if (isExitHovered && sprite_exit.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
                         window.close();
                     }
+                    if (event.mouseButton.button == sf::Mouse::Left) {
+                        sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
+                        if (blackBox.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
+                            isBlackSelected = true;
+                            isWhiteSelected = false;
+                    } else if (whiteBox.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
+                        isBlackSelected = false;
+                        isWhiteSelected = true;
+                    }
+                }
             }
-        }
+        } else if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::N) { // Touche N pour noir
+                    backgroundColor = sf::Color::Black;
+                } else if (event.key.code == sf::Keyboard::L) { // Touche L pour blanc
+                    backgroundColor = sf::Color::White;
+                }
+            }
     }
         window.clear();
         window.draw(sprite_background);
@@ -150,6 +191,15 @@ int main()
             window.draw(inputText);
             window.draw(inputBox);
             window.draw(inputTextValue);
+            window.draw(blackBox);
+            window.draw(blackText);
+            window.draw(whiteBox);
+            window.draw(whiteText);
+        }
+        if (isBlackSelected && gib_name != NULL) {
+            window.clear(sf::Color::Black);
+        } else if (isWhiteSelected && gib_name != NULL) {
+            window.clear(sf::Color::White);
         }
         window.display();
     }

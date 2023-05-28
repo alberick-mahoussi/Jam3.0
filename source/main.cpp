@@ -48,6 +48,9 @@ int main()
     sf::Music music_button;
     music_button.openFromFile("music/over_bu.wav");
 
+    sf::Music music_button2;
+    music_button.openFromFile("music/button.wav");
+
     sprite_background.setPosition(0, 0);
     sprite_start.setPosition(790, 290);
     sprite_gmplay.setPosition(775, 500);
@@ -115,6 +118,8 @@ int main()
             else if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Enter) {
                     gib_name = true;
+                    music_button2.setLoop(false);
+                    music_button2.play();
                     archanoid(surnom);
                     window.close();
                 }
@@ -170,6 +175,8 @@ int main()
                     // Vérifie si le bouton Start est survolé et cliqué
                     if (isStartHovered && sprite_start.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
                         start_pressed = true;
+                        music_button2.setLoop(false);
+                        music_button2.play();
                         std::cout << "Chargement du jeu Bububle Yang..." << std::endl;
                          music_menu.stop();
                         //window.close(); // Quitte le menu après avoir chargé le jeu

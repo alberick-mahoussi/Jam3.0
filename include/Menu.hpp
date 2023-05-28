@@ -32,6 +32,7 @@ namespace Jam {
                 sf::Sprite sprite_hoppy;
                 sf::Music music_menu;
                 sf::Music music_button;
+                sf::Music music_button2;
                 bool isStartHovered = false;
                 bool isGmplayHovered = false;
                 bool isExitHovered = false;

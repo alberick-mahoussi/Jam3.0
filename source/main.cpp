@@ -7,6 +7,7 @@
 
 #include "../include/jam.hpp"
 
+int archanoid(std::string name);
 
 int main()
 {
@@ -110,8 +111,8 @@ int main()
             else if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::Enter) {
                     gib_name = true;
-                    //std::cout << "Surnom : " << surnom << std::endl;
-                    // Ici, vous pouvez faire ce que vous voulez avec le surnom
+                    archanoid(surnom);
+                    window.close();
                 }
             } else if (event.type == sf::Event::MouseMoved) {
                 // Récupère les coordonnées de la souris
@@ -196,11 +197,11 @@ int main()
             window.draw(whiteBox);
             window.draw(whiteText);
         }
-        if (isBlackSelected && gib_name != NULL) {
+        /*if (isBlackSelected && gib_name != NULL) {
             window.clear(sf::Color::Black);
         } else if (isWhiteSelected && gib_name != NULL) {
             window.clear(sf::Color::White);
-        }
+        }*/
         window.display();
     }
     return 0;

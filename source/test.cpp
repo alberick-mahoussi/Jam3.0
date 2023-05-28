@@ -7,7 +7,7 @@
 
 #include "../include/Arckanoid.hpp"
 
-Arckanoid::Ball::Ball(float x, float y, float radius) {
+/*Arckanoid::Ball::Ball(float x, float y, float radius) {
     shape.setPosition(x, y);
     shape.setRadius(radius);
     // Initialisation de la vitesse et de la direction de la balle
@@ -93,8 +93,9 @@ Arckanoid::Brick::Brick(float x, float y, float width, float height, sf::Color c
     this->points = points;
 }
 
-bool Arckanoid::Brick::isCollidingWithBall(const Arckanoid::Ball &ball) {
-    return shape.getGlobalBounds().intersects(ball.getShape().getGlobalBounds());
+bool Arckanoid::Brick::isCollidingWithBall(const Arckanoid::Ball &ball) 
+{
+    return shape.getGlobalBounds().intersects(ball.getShape().getGlobalBounds());    //return shape.getGlobalBounds().intersects(ball.getShape().getGlobalBounds());
 }
 
 void Arckanoid::Brick::update() {
@@ -118,4 +119,4 @@ bool Arckanoid::Level::isLevelComplete() {
 
 void Arckanoid::Level::update() {
     // Autres mises à jour du niveau...
-}
+}*/

@@ -27,9 +27,10 @@ namespace Arckanoid {
             ~Ball() = default;
             void move();
             void checkCollisionWithWalls(float windowWidth, float windowHeight);
-            void checkCollisionWithPaddle(Paddle& paddle);
-            void checkCollisionWithBricks(std::vector<Brick>& bricks);
+            //void checkCollisionWithPaddle(Paddle& paddle);
+            //void checkCollisionWithBricks(std::vector<Brick>& bricks);
             void update();
+            sf::CircleShape getShape() { return shape; }
     };
     
     class Paddle {
@@ -43,6 +44,7 @@ namespace Arckanoid {
             void moveRight();
             void checkCollisionWithWalls(float windowWidth);
             void update();
+            sf::RectangleShape getShape() { return shape; }
     };
     class Brick {
 
@@ -54,6 +56,7 @@ namespace Arckanoid {
             ~Brick() = default;
             bool isCollidingWithBall(const Ball& ball);
             void update();
+            sf::RectangleShape getShape() { return shape; }
     };
     class Level {
         private:

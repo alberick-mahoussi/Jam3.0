@@ -44,6 +44,10 @@ int main()
     music_menu.setLoop(true);
     music_menu.play();
 
+
+    sf::Music music_button;
+    music_button.openFromFile("music/over_bu.wav");
+
     sprite_background.setPosition(0, 0);
     sprite_start.setPosition(790, 290);
     sprite_gmplay.setPosition(775, 500);
@@ -120,6 +124,10 @@ int main()
 
                 // Vérifie si la souris est sur le bouton Start
                 if (sprite_start.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
+                    if(isStartHovered == false) {
+                        music_button.setLoop(false);
+                        music_button.play();
+                    }
                     isStartHovered = true;
                     sprite_start.setScale(sf::Vector2f(0.2, 0.2)); // Agrandit l'image
                 } else {
@@ -129,8 +137,13 @@ int main()
 
                 // Vérifie si la souris est sur le bouton Gmplay
                 if (sprite_gmplay.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
+                    if(isGmplayHovered == false) {
+                        music_button.setLoop(false);
+                        music_button.play();
+                    }
                     isGmplayHovered = true;
                     sprite_gmplay.setScale(sf::Vector2f(0.8, 0.8)); // Agrandit l'image
+
                 } else {
                     isGmplayHovered = false;
                     sprite_gmplay.setScale(sf::Vector2f(0.7, 0.7)); // Rétablit la taille d'origine
@@ -138,8 +151,13 @@ int main()
 
                 // Vérifie si la souris est sur le bouton Exit
                 if (sprite_exit.getGlobalBounds().contains(sf::Vector2f(mousePosition))) {
+                    if(isExitHovered == false) {
+                        music_button.setLoop(false);
+                        music_button.play();
+                    }
                     isExitHovered = true;
                     sprite_exit.setScale(sf::Vector2f(0.9, 0.9)); // Agrandit l'image
+
                 } else {
                     isExitHovered = false;
                     sprite_exit.setScale(sf::Vector2f(0.8, 0.8)); // Rétablit la taille d'origine

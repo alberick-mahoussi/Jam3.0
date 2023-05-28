@@ -19,6 +19,7 @@ Jam::Menu::Menu()
     sprite_gmplay.setTexture(texture_gmplayer);
     sprite_exit.setTexture(texture_exit);
     music_menu.openFromFile("music/musicMenu.wav");
+    music_button.openFromFile("music/button.wav");
 }
 
 void Jam::Menu::Scale_sprites()
@@ -41,4 +42,10 @@ void Jam::Menu::PlayMusic_menu()
 {
     music_menu.setLoop(true);
     music_menu.play();
+}
+
+void Jam::Menu::PlayMusic_button()
+{
+    music_button.setLoop(false);
+    music_button.play();
 }
